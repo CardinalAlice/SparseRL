@@ -1,0 +1,1 @@
+"""Minimal SparseRL pipeline package."""
