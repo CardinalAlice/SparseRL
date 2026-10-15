@@ -29,13 +29,15 @@ def build_inputs(model: SparseRLModel, matrix_embeds, prompt: str, code: str):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", default="")
+    parser.add_argument("--model-path", default=ModelConfig.model_path)
+    parser.add_argument("--tokenizer-path", default=ModelConfig.tokenizer_path)
     parser.add_argument("--steps", type=int, default=2)
     parser.add_argument("--lr", type=float, default=5e-5)
     parser.add_argument("--dataset-dir", default=DataConfig.dataset_dir)
     parser.add_argument("--max-nnz", type=int, default=DataConfig.max_nnz)
     args = parser.parse_args()
 
-    model_cfg = ModelConfig()
+    model_cfg = ModelConfig(model_path=args.model_path, tokenizer_path=args.tokenizer_path)
     train_cfg = TrainConfig(total_steps=args.steps)
 
     model = SparseRLModel(
